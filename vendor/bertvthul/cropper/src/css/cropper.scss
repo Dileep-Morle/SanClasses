@@ -1,0 +1,246 @@
+.cropper {
+	position: relative;
+	width: 250px;
+	max-width: 100%;
+	background: rgba(0,0,0,0.05);
+
+	&.cropper--landscape {
+		width: 100%;
+	}
+	&.cropper--wider {
+		width: 260px;
+	}
+
+	&.cropper--dropzone {
+
+	}
+
+	&.cropper--dragover {
+		border-color: 1px dashed #000;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.5);
+		pointer-events: none;
+		z-index: 4;
+		opacity: 0;
+		transition: opacity .8s ease;
+	}
+
+	&.cropper--loading, &.cropper--dragover {
+		&:before {
+			opacity: 1;
+		}
+	}
+
+	input[type="file"] {
+		display: none;
+	}
+}
+
+.cropper__load-indicator {
+	display: none;
+
+	.cropper--loading & {
+		display: block;
+		position: absolute;
+		z-index: 4;
+		text-align: center;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		color: #fff;
+		pointer-events: none;
+	}
+}
+
+.cropper__editor {
+	.cropper__crop {
+
+		.cropper__example {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 2;
+			background-size: cover;
+			background-color: rgba(0,0,0,0)
+		}
+
+		.cropper__image-con {
+			overflow: auto;
+			position: relative;
+			scrollbar-width: none; /* For Firefox */
+	    	-ms-overflow-style: none; /* For Internet Explorer and Edge */
+	    	&::-webkit-scrollbar {
+			    width: 0px; /* For Chrome, Safari, and Opera */
+			    height: 0px;
+			}
+
+			.cropper__image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-size: contain;
+			}
+
+			&.cropper__crop--wider {
+				.cropper__image {
+					height: 100%;
+				}
+			}
+
+			&.cropper__crop--higher {
+				.cropper__image {
+					width: 100%;
+				}
+			}
+		}
+
+		.cropper__options {
+			display: block;
+			position: absolute;
+			z-index: 4;
+			text-align: center;
+			width: 100%;
+			bottom: 0;
+			left: 0;
+
+			background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+
+			.cropper--no-image &, .cropper--loading & {
+				display: none;
+			}
+
+			.cropper--inline-save & {
+				opacity: 0;
+				transition: opacity .3s ease;
+			}
+			.cropper--inline-save:hover & {
+				opacity: 1;
+			}
+
+			.btn {
+				margin: 2px;
+			}
+			.cropper__upload {
+				.cropper--no-image & {
+					display: none;
+				}
+			}
+			.cropper__savecrop {
+				display: none;
+			}
+		}
+
+		&.cropper__crop--cropping {
+			.cropper__example {
+				display: none;
+			}
+			.cropper__options {
+				.cropper__upload {
+					display: none;
+				}
+				.cropper__recrop {
+					display: none;
+				}
+				.cropper__savecrop {
+					display: inline-block;
+				}
+			}
+		}
+	}
+
+
+	> .cropper__upload {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		transform: translateY(-50%);
+		display: block;
+		margin: 0;
+		z-index: 3;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity .3s ease;
+
+		.cropper--no-image & {
+			pointer-events: auto;
+			opacity: 1;
+		}
+	}
+}
+
+.cropper__croptools {
+	display: none;
+
+	.cropper__crop--cropping & {
+		display: block;
+	}
+
+	.cropper--no-image &, .cropper--loading & {
+		display: none;
+	}
+	
+	.btn {
+		position: absolute;
+		z-index: 5;
+		background: rgba(0,0,0,0.2);
+		color: #fff;
+		opacity: 0;
+		transition: opacity 0.6s ease;
+
+		.cropper__crop--cropping & {
+			opacity: 1;
+		}
+	}
+	.cropper__crop--wider & {
+		.btn {
+			transform: rotate(-90deg) translateX(50%);
+			transform-origin: 50% 50%;
+			top: 50%;
+		}
+		.btn-arrow-up {
+			left: 0;
+		}
+		.btn-arrow-down {
+			right: 0;
+		}
+	}
+
+	.cropper__crop--higher & {
+		.btn-arrow-up {
+			top: 0;
+			right: 0;
+		}
+		.btn-arrow-down {
+			right: 0;
+			bottom: 0;
+		}
+	}
+}
+
+#cropper-modal {
+	#cropper-modal-tab {
+		#stock-list {
+			.cropper-select-image {
+				cursor: pointer;
+			}
+		}
+	}
+}

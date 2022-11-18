@@ -1,0 +1,30 @@
+{
+    "name": "bertvthul/cropper",
+    "description": "Simple upload and crop images in Laravel",
+    "keywords": [
+        "images",
+        "upload",
+        "crop",
+        "edit",
+        "laravel"
+    ],
+    "homepage": "https://github.com/bertvthul/cropper",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Bert van t Hul",
+            "email": "bertvthul@gmail.com",
+            "homepage": "https://bertvthul.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bertvthul\\Cropper\\": "src"
+        }
+    }
+}
